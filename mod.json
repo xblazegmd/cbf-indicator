@@ -8,7 +8,7 @@
 	},
 	"id": "xblazegmd.cbf-indicator",
 	"name": "CBF Indicator",
-	"version": "v1.0.0",
+	"version": "v1.0.1",
 	"developer": "XblazeGMD",
 	"description": "Make it very obvious when someone's using CBF",
 	"dependencies": {
