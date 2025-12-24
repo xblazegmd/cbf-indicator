@@ -10,7 +10,7 @@
 	"name": "CBF Indicator",
 	"version": "v1.0.0",
 	"developer": "XblazeGMD",
-	"description": "Make it very clear when someone's using CBF",
+	"description": "Make it very obvious when someone's using CBF",
 	"dependencies": {
 		"geode.node-ids": ">=v1.20.0",
 		"syzzi.click_between_frames": ">=1.4.6"
