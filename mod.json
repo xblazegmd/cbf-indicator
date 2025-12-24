@@ -21,12 +21,9 @@
 		]
 	},
 	"settings": {
-		"lvl-complete-string": {
-			"type": "string",
-			"name": "Level Complete Text",
-			"description": "The text that will appear when beating a level with CBF",
-			"default": "CBF Detected Loser!",
-			"filter": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\"'%&$#!()"
+		"indicator-section": {
+			"type": "title",
+			"name": "Indicator Options"
 		},
 		"show-as-image": {
 			"type": "bool",
@@ -36,9 +33,20 @@
 		},
 		"alignment": {
 			"type": "string",
-			"name": "Indicator alignment",
+			"name": "Indicator Alignment",
 			"one-of": ["Top-Left", "Top-Right", "Bottom-Left", "Bottom-Right"],
 			"default": "Top-Left"
+		},
+		"endscreen-section": {
+			"type": "title",
+			"name": "Endscreen Options"
+		},
+		"lvl-complete-string": {
+			"type": "string",
+			"name": "Level Complete Text",
+			"description": "The text that will appear when beating a level with CBF",
+			"default": "CBF Detected Loser!",
+			"filter": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\"'%&$#!()"
 		}
 	},
 	"tags": ["interface", "enhancement"]
