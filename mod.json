@@ -28,5 +28,6 @@
 			"default": "CBF Detected Loser!",
 			"filter": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\"'%&$#!()"
 		}
-	}
+	},
+	"tags": ["interface", "enhancement"]
 }
