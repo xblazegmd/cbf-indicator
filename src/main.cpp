@@ -12,11 +12,10 @@ class $modify(CBFIndUILayer, UILayer) {
 		auto size = cocos2d::CCDirector::sharedDirector()->getWinSize();
 
 		auto indicator = CCSprite::create("cbf.png"_spr);
-		indicator->setScale(.5f);
+		indicator->setScale(.2f);
 		indicator->setPosition({ 0, size.height });
 		indicator->setAnchorPoint({ 0.f, 1.f });
-		indicator->setOpacity(30);
-		indicator->setScale(.5f);
+		indicator->setOpacity(50);
 
 		indicator->setID("cbf_indicator"_spr);
 
