@@ -49,5 +49,8 @@
 			"filter": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\"'%&$#!()"
 		}
 	},
-	"tags": ["interface", "enhancement"]
+	"tags": ["interface", "enhancement"],
+	"links": {
+		"source": "https://github.com/xblazegmd/cbf-indicator"
+	}
 }
