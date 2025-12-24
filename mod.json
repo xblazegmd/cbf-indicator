@@ -19,5 +19,14 @@
 		"sprites": [
 			"resources/cbf.png"
 		]
+	},
+	"settings": {
+		"lvl-complete-string": {
+			"type": "string",
+			"name": "Level Complete Text",
+			"description": "The text that will appear when beating a level with CBF",
+			"default": "CBF Detected Loser!",
+			"filter": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\"'%&$#!()"
+		}
 	}
 }

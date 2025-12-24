@@ -1,7 +1,6 @@
-#include "Geode/cocos/robtop/xml/DS_Dictionary.h"
-#include "Geode/platform/ItaniumCast.hpp"
 #include <Geode/Geode.hpp>
 #include <Geode/Loader.hpp>
+#include <Geode/loader/Mod.hpp>
 
 #include <Geode/modify/UILayer.hpp>
 #include <Geode/modify/EndLevelLayer.hpp>
@@ -55,7 +54,7 @@ class $modify(CBFIndEndLevelLayer, EndLevelLayer) {
 		logo->setID("cbf_logo"_spr);
 
 		// Edit the level complete label to say a custom message
-		std::string str = "CBF Detected Loser!";
+		std::string str = Mod::get()->getSettingValue<std::string>("lvl-complete-string");
 
 		auto completeMsg = m_mainLayer->getChildByID("complete-message");
 		if (!completeMsg) return;
