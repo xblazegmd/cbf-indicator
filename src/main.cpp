@@ -11,21 +11,23 @@ class $modify(CBFIndUILayer, UILayer) {
 
 		auto size = cocos2d::CCDirector::sharedDirector()->getWinSize();
 
-		auto test = CCLabelBMFont::create("cbf loser", "bigFont.fnt");
+		auto indicator = CCSprite::create("cbf.png"_spr);
+		indicator->setScale(.5f);
+		indicator->setPosition({ 0, size.height });
+		indicator->setAnchorPoint({ 0.f, 1.f });
+		indicator->setOpacity(30);
+		indicator->setScale(.5f);
 
-		test->setPosition({ 0, size.height });
-		test->setAnchorPoint({ 0.f, 1.f });
-		test->setOpacity(30);
-		test->setScale(.5f);
+		indicator->setID("cbf_indicator"_spr);
 
-		this->addChild(test);
+		this->addChild(indicator);
 
 		auto cbf = Loader::get()->getLoadedMod("syzzi.click_between_frames");
 		bool isCBFOn = cbf && !cbf->getSettingValue<bool>("soft-toggle");
-		test->setVisible(isCBFOn);
+		indicator->setVisible(isCBFOn);
 
-		listenForSettingChanges<bool>("soft-toggle", [test](bool val) {
-			test->setVisible(!val);
+		listenForSettingChanges<bool>("soft-toggle", [indicator](bool val) {
+			indicator->setVisible(!val);
 		}, cbf);
 
 		return true;
