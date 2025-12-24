@@ -1,3 +1,4 @@
+#include "Geode/cocos/base_nodes/CCNode.h"
 #include <Geode/Geode.hpp>
 #include <Geode/Loader.hpp>
 #include <Geode/loader/Event.hpp>
@@ -40,29 +41,65 @@ class $modify(CBFIndUILayer, UILayer) {
 	bool init(GJBaseGameLayer* layer) {
 		if (!UILayer::init(layer)) return false;
 
-		auto size = cocos2d::CCDirector::sharedDirector()->getWinSize();
-
-		auto indicator = CCSprite::create("cbf.png"_spr);
-
-		indicator->setScale(.2f);
-		indicator->setPosition({ 0, size.height });
-		indicator->setAnchorPoint({ 0.f, 1.f });
-		indicator->setOpacity(50);
-
-		indicator->setID("cbf_indicator"_spr);
-
-		this->addChild(indicator);
-
 		auto cbf = Loader::get()->getLoadedMod("syzzi.click_between_frames");
 		bool isCBFOn = cbf && !cbf->getSettingValue<bool>("soft-toggle");
-		indicator->setVisible(isCBFOn);
 
-		this->addEventListener<ToggleCBFEventFilter>([indicator](bool on) {
-			indicator->setVisible(on);
-			return ListenerResult::Stop;
-		});
+		/* Wish I didn't had to copy-paste the exact same setup code on both if blocks, since that makes it
+		harder to change stuff later on, but welp, that's all I can do ;-; */
+		if (Mod::get()->getSettingValue<bool>("show-as-image")) {
+			auto indicator = CCSprite::create("cbf.png"_spr);
+
+			indicator->setScale(.2f);
+			positionIndicator(indicator);
+			indicator->setOpacity(50);
+
+			indicator->setID("cbf_indicator"_spr);
+
+			indicator->setVisible(isCBFOn);
+
+			this->addChild(indicator);
+			this->addEventListener<ToggleCBFEventFilter>([indicator](bool on) {
+				indicator->setVisible(on);
+				return ListenerResult::Stop;
+			});
+		} else {
+			auto indicator = CCLabelBMFont::create("CBF", "bigFont.fnt");
+
+			indicator->setScale(.3f);
+			positionIndicator(indicator);
+			indicator->setOpacity(50);
+
+			indicator->setID("cbf_indicator"_spr);
+
+			indicator->setVisible(isCBFOn);
+
+			this->addChild(indicator);
+			this->addEventListener<ToggleCBFEventFilter>([indicator](bool on) {
+				indicator->setVisible(on);
+				return ListenerResult::Stop;
+			});
+		}
 
 		return true;
+	}
+
+	void positionIndicator(CCNode* indicator) {
+		auto alignment = Mod::get()->getSettingValue<std::string>("alignment");
+		auto winSize = CCDirector::sharedDirector()->getWinSize();
+
+		if (alignment == "Top-Left") {
+			indicator->setPosition({ 0, winSize.height });
+			indicator->setAnchorPoint({ 0, 1 });
+		} else if (alignment == "Top-Right") {
+			indicator->setPosition({ winSize.width, winSize.height });
+			indicator->setAnchorPoint({ 1, 1 });
+		} else if (alignment == "Bottom-Left") {
+			indicator->setPosition({ 0, 0 });
+			indicator->setAnchorPoint({ 0, 0 });
+		} else if (alignment == "Bottom-Right") {
+			indicator->setPosition({ winSize.width, 0 });
+			indicator->setAnchorPoint({ 1, 0 });
+		}
 	}
 };
 

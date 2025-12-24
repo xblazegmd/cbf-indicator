@@ -27,6 +27,18 @@
 			"description": "The text that will appear when beating a level with CBF",
 			"default": "CBF Detected Loser!",
 			"filter": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\"'%&$#!()"
+		},
+		"show-as-image": {
+			"type": "bool",
+			"name": "Show Indicator As Image",
+			"description": "If the CBF indicator should be an image (CBF Logo)",
+			"default": true
+		},
+		"alignment": {
+			"type": "string",
+			"name": "Indicator alignment",
+			"one-of": ["Top-Left", "Top-Right", "Bottom-Left", "Bottom-Right"],
+			"default": "Top-Left"
 		}
 	},
 	"tags": ["interface", "enhancement"]
