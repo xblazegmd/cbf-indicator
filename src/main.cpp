@@ -1,4 +1,3 @@
-#include "Geode/cocos/base_nodes/CCNode.h"
 #include <Geode/Geode.hpp>
 #include <Geode/Loader.hpp>
 #include <Geode/loader/Event.hpp>
