@@ -43,7 +43,7 @@
 		},
 		"lvl-complete-string": {
 			"type": "string",
-			"name": "Level Complete Text",
+			"name": "Level Complete With CBF Text",
 			"description": "The text that will appear when beating a level with CBF",
 			"default": "CBF Detected Loser!",
 			"filter": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\"'%&$#!()"

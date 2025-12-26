@@ -1,5 +1,6 @@
 # 1.1
 - Made CBF indicator freeze on level completion
+- Changed title for "Level Complete Text" setting to "Level Complete With CBF Text" 
 - My code is now a bit less terrible
 
 # 1.0.1
