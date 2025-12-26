@@ -80,6 +80,7 @@ class $modify(CBFIndUILayer, UILayer) {
 
 		this->addChild(indicator);
 		this->addEventListener<ToggleCBFEventFilter>([indicator](bool on) {
+			g_isCBFOn = on;
 			indicator->setVisible(on);
 			return ListenerResult::Stop;
 		});
@@ -139,5 +140,10 @@ class $modify(CBFIndEndLevelLayer, EndLevelLayer) {
 		}
 
 		m_mainLayer->addChild(logo);
+	}
+
+	void onReplay(CCObject* sender) {
+		EndLevelLayer::onReplay(sender);
+		g_levelFinished = false;
 	}
 };
