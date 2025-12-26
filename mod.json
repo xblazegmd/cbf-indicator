@@ -47,6 +47,12 @@
 			"description": "The text that will appear when beating a level with CBF",
 			"default": "CBF Detected Loser!",
 			"filter": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_\"'%&$#!()"
+		},
+		"show-watermark": {
+			"type": "bool",
+			"name": "Show Mod Watermark",
+			"description": "If enabled, there will be a watermark on the bottom left saying \"CBF Indicator v[mod-version\". If you're not using CBF, it will end with \"(CBF disabled)\"",
+			"default": true
 		}
 	},
 	"tags": ["interface", "enhancement"],

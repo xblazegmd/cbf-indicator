@@ -1,3 +1,4 @@
+#include "Geode/cocos/label_nodes/CCLabelBMFont.h"
 #include <Geode/Geode.hpp>
 #include <Geode/Loader.hpp>
 #include <Geode/loader/Event.hpp>
@@ -112,7 +113,22 @@ class $modify(CBFIndEndLevelLayer, EndLevelLayer) {
 	void customSetup() {
 		EndLevelLayer::customSetup();
 
-		auto cbf = Loader::get()->getLoadedMod("syzzi.click_between_frames");
+		// CBF Indicator watermark
+		if (Mod::get()->getSettingValue<bool>("show-watermark")) {
+			std::string watermarkStr = "CBF Indicator v1.1";
+			if (!g_isCBFOn) { watermarkStr += " (CBF disabled)"; }
+
+			auto watermark = CCLabelBMFont::create(watermarkStr.c_str(), "bigFont.fnt");
+
+			watermark->setScale(.2f);
+			watermark->setPosition({ 0, 0 });
+			watermark->setAnchorPoint({ 0, 0 });
+			watermark->setOpacity(10);
+			watermark->setID("watermark"_spr);
+
+			this->addChild(watermark);
+		}
+
 		if (!g_isCBFOn) return;
 
 		// CBF logo nearby the level complete text
