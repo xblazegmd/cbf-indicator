@@ -5,8 +5,12 @@
 
 #include <Geode/modify/UILayer.hpp>
 #include <Geode/modify/EndLevelLayer.hpp>
+#include <Geode/modify/PlayLayer.hpp>
 
 using namespace geode::prelude;
+
+static bool g_levelFinished = false;
+static bool g_isCBFOn = false;
 
 /// Wrapper event around `listenForSettingChanges`
 class ToggleCBFEvent : public Event {
@@ -22,6 +26,8 @@ public:
 	using Callback = ListenerResult(bool);
 
 	ListenerResult handle(std::function<Callback> callback, ToggleCBFEvent* ev) {
+		if (g_levelFinished) return ListenerResult::Stop;
+
 		auto on = !ev->getSettingVal();
 		return callback(on);
 	}
@@ -36,12 +42,20 @@ $execute {
 	}, cbf);
 }
 
+class $modify(CBFIndPlayLayer, PlayLayer) {
+	void levelComplete() {
+		PlayLayer::levelComplete();
+		g_levelFinished = true;
+	}
+};
+
 class $modify(CBFIndUILayer, UILayer) {
 	bool init(GJBaseGameLayer* layer) {
 		if (!UILayer::init(layer)) return false;
+		g_levelFinished = false; // Chances are the level's probably not finished yet so this is safe
 
 		auto cbf = Loader::get()->getLoadedMod("syzzi.click_between_frames");
-		bool isCBFOn = cbf && !cbf->getSettingValue<bool>("soft-toggle");
+		g_isCBFOn = cbf && !cbf->getSettingValue<bool>("soft-toggle");
 
 		/* Wish I didn't had to copy-paste the exact same setup code on both if blocks, since that makes it
 		harder to change stuff later on, but welp, that's all I can do ;-; */
@@ -50,7 +64,7 @@ class $modify(CBFIndUILayer, UILayer) {
 		CCNode* indicator;
 		if (Mod::get()->getSettingValue<bool>("show-as-image")) {
 			indicator = CCSprite::create("cbf.png"_spr);
-			static_cast<CCSprite*>(indicator)->setOpacity(50);
+			static_cast<CCSprite*>(indicator)->setOpacity(50); // DANG IT WHY DIDN'T I THINK OF USING A STATIC CAST IN MY OLD CODE ;-;
 			indicator->setScale(.2f);
 			
 		} else {
@@ -60,7 +74,7 @@ class $modify(CBFIndUILayer, UILayer) {
 		}
 
 		positionIndicator(indicator);
-		indicator->setVisible(isCBFOn);
+		indicator->setVisible(g_isCBFOn);
 
 		indicator->setID("cbf_indicator"_spr);
 
@@ -98,7 +112,7 @@ class $modify(CBFIndEndLevelLayer, EndLevelLayer) {
 		EndLevelLayer::customSetup();
 
 		auto cbf = Loader::get()->getLoadedMod("syzzi.click_between_frames");
-		if (!cbf || cbf->getSettingValue<bool>("soft-toggle")) return;
+		if (!g_isCBFOn) return;
 
 		// CBF logo nearby the level complete text
 		auto logo = CCSprite::create("cbf.png"_spr);
