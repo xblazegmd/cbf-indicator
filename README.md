@@ -3,6 +3,11 @@
 # CBF Indicator
 A simple mod that makes it very obvious when someone is using CBF
 
+> [!IMPORTANT]
+> This mod is **discontinued** due to the recent Geometry Dash update that added CBF as a vanilla feature (Click Between Steps, CBS), when this mod is made for the Geode CBF mod
+> 
+> This mod is only compatible with Geode 4.10.0, aka, Geometry Dash version 2.2074. 2.208 support won't be added for the above reasons. Instead, a new mod (similar to this one) will be made once Geode updates to support 2.208, that will be specifically for the RobTop CBS.
+
 <div align="center">
 
 ## With the mod
